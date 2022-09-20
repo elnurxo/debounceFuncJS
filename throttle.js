@@ -1,7 +1,8 @@
 //Throttle Function
 function throttle(callback, delay) {
     let timerId;
-    const lastCalledTime = 0;
+    let lastCalledTime = 0;
+
     const throttledFunction =  function(...args){
         const currentTime = Date.now();
         const timeSinceLastCall = currentTime - lastCalledTime;
