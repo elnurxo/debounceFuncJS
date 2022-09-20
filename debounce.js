@@ -1,3 +1,4 @@
+//Debounce Function
 function debounce(callback, delay, immediate = false) {
   let timerId;
 

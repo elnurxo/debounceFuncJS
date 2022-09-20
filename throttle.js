@@ -1,0 +1,31 @@
+//Throttle Function
+function throttle(callback, delay) {
+    let timerId;
+    const lastCalledTime = 0;
+    const throttledFunction =  function(...args){
+        const currentTime = Date.now();
+        const timeSinceLastCall = currentTime - lastCalledTime;
+        let delayRemaining = delay - timeSinceLastCall;
+
+        if(delayRemaining<=0){
+            lastCalledTime = currentTime;
+            callback.apply(this,args);
+        }
+        else{
+            clearTimeout(timerId);
+
+            timerId = setTimeout(() => {
+                lastCalledTime = Date.now();
+                callback.apply(this,args);
+            }, delayRemaining);
+        }
+    }
+
+    throttledFunction.cancel = function(){
+        clearTimeout(timerId);
+    }
+
+    return throttledFunction;
+}
+
+exports.throttle = throttle;
